@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router,Route,NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -8,13 +10,54 @@ import { Router,Route,NavigationExtras } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  name: any;
+  nickname: any;
+  age: any;
 
-  constructor(private router: Router,private route: Route,private navigate: NavigationExtras) {}
+  constructor(private router: Router, private alertController: AlertController) {}
 
-  submit(){
+  async presentAlertConfirm(form){
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you sure to submit this form?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Confirm Cancel');
 
-    console.log("Button Ok")
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.submit(form)
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
-    this.router.navigate(['about']);
+  submit(form: NgForm){
+
+    this.name = form.value.name;
+    this.nickname = form.value.nickname;
+    this.age = form.value.age;
+    console.log("Name ",this.name);
+    console.log("Nickname ",this.nickname);
+    console.log("Age ",this.age);
+
+    let navigationExtras: NavigationExtras ={
+      state: {
+        name: this.name,
+        nickname: this.nickname,
+        age: this.age
+      }
+
+    };
+    this.router.navigate(['about'], navigationExtras);
   }
 }
+
+
+   

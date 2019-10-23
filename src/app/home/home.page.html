@@ -1,29 +1,33 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home1
+      Home Page
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid class="homepage">
+    <form #form="ngForm" (ngSubmit) = "presentAlertConfirm(form)" method="post">
     <ion-row>
-      <ion-input placeholder="Name" type="text" name="name"></ion-input>
+      <ion-input class="input" ngModel placeholder="Name" name="name" type="text" ></ion-input>
     </ion-row>
+    <br>
 
     <ion-row>
-      <ion-input placeholder="Nickname" type="text" name="nickname"></ion-input>
+      <ion-input class="input" ngModel placeholder="Nickname"  name="nickname" type="text"></ion-input>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-input class="input" ngModel placeholder="Age"  name="age" type="number"></ion-input>
     </ion-row>
 
-    <ion-row>
-      <ion-input placeholder="Age" type="number" name="age"></ion-input>
-    </ion-row>
-  </ion-grid>
-    <ion-grid>
+    <br>
+
       <ion-row>
-      <ion-button color="primary" (click)="submit()">Submit</ion-button>
+      <ion-button class="button" color="primary" type="submit">Submit</ion-button>
   
     </ion-row>
+  </form>
   </ion-grid>
 </ion-content>
